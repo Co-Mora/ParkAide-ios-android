@@ -13,13 +13,19 @@
     "qs": "^6.6.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-app-intro-slider": "^1.0.1",
     "react-native-code-input": "^1.0.6",
     "react-native-elements": "^0.19.1",
     "react-native-loading-spinner-overlay": "^1.0.1",
+    "react-native-onboarding-swiper": "^1.0.0",
+    "react-native-picker-select": "^5.2.0",
     "react-native-pin-code": "^0.5.3",
+    "react-native-router-flux": "^4.0.6",
+    "react-native-swiper": "^1.5.14",
     "react-native-tabbar-bottom": "^1.0.4",
     "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^3.0.9"
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

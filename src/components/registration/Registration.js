@@ -1,30 +1,28 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Alert, Text } from 'react-native';
-import SignUpServices from '../../services/register/signUp/SignUpServices';
-import GetStarted from '../getStarted/GetStarted'
-
-
+import {AsyncStorage} from 'react-native';
+import {Actions} from 'react-native-router-flux'
+import Router from '../../Router';
 export default class Registration extends Component {
     constructor() {
         super()
     }
     state = {
-
+        token: null
     }
     componentDidMount() {
-        SignUpServices.fetchAllData('carpark')
-        .then((response) => response.json())
-        .then((responseJson) => {
-          alert(responseJson);
-        })
-        .catch((error) => {
-            alert(error);
+       
+        AsyncStorage.getItem("token").then((value) => {
+            this.setState({token: JSON.parse(value)});
+            if(this.state.token) {
+                Actions.home();
+            }
+
         });
+      
     }
     render() {
     return (
-        <GetStarted />
-
+        <Router />
     );
   }
 }

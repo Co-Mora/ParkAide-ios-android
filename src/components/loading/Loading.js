@@ -1,19 +1,39 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View, StyleSheet } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-const Loading = (props) => {
+export default class Loading extends Component {
+
+    state = {
+
+      spinner: true
+
+    }
+
+    loadingPage =() => {
+
+      setTimeout(() => {
+          this.setState({ spinner: !this.props.spinner });
+      }, 1000);
+
+    }
+    componentDidMount() {
+      this.loadingPage();
+    }
+
+    render() {
+      return (
+        <View style={styles.container}>
+          <Spinner
+            visible={this.state.spinner}
+            textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
+        </View>
+       
+      );
+    }
     
-    return (
-      <View style={styles.container}>
-        <Spinner
-          visible={props.spinner}
-          textContent={'Loading...'}
-          textStyle={styles.spinnerTextStyle}
-        />
-      </View>
-     
-    );
   }
 
 const styles = StyleSheet.create({
@@ -32,5 +52,3 @@ const styles = StyleSheet.create({
   },
  
 });
-
-export default Loading;

@@ -1,27 +1,21 @@
 import React from 'react';
-
 import {View, Image, StyleSheet, Alert, Text } from 'react-native';
 
 import { Button } from 'react-native-elements';
-import Loading from '../loading/Loading';
+import {Actions} from 'react-native-router-flux'
 
 
-
-const GetStarted = (props) => {
+const GetStarted = () => {
     return (
         <View style={styles.container}>
-            <View>
-                <Loading spinner={props.loading === true ? true : false}/>
-            </View>
             <View style={styles.imageContainer}>
                 <Image style={styles.imageStyle} source={require('../../../assets/icon1.png')}/>
-                <Text style={styles.textStyle}>Park Aide</Text>
             </View>
             <View style={styles.btnContainer}>
                 <Button
                     title="GET STARTED"
                     onPress={() => {
-                        Alert.alert('Coming Soon.....')
+                        Actions.auth()
                     }}
                     titleStyle={{ fontWeight: "700" }}
                     buttonStyle={styles.btnStyle}

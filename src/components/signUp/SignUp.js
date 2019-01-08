@@ -1,56 +1,75 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Alert, Image } from 'react-native';
-import { Button, FormLabel, FormInput, Text } from 'react-native-elements';
+import {View, StyleSheet, Image, AsyncStorage } from 'react-native';
+import { Button, FormLabel, FormInput, } from 'react-native-elements';
+import {Actions} from 'react-native-router-flux';
+
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import reducers from '../../reducers/index'
 //import API Services
 import qs from 'qs';
 import SignUpServices from '../../services/register/signUp/SignUpServices';
-
 
 export default class SignUp extends Component {
     constructor() {
         super()
     }
     state = {
+        mobile: '',
         verifyID: null,
-        mobile: ''
-    }
-    handleSubmitUser = () => {
-        const res = SignUpServices.createUser('auth2/app/register', qs.stringify({
+        dataSource: []
+    };
+    
+    handleSubmitUser = async () => {
+        if(!this.state.mobile) {
+            alert('Type Phone Number')
+        }
+        const res = await SignUpServices.createUser('auth2/app/register', qs.stringify({
             mobile: this.state.mobile
-        }));
-        alert(res)
-    }
+        }))
+        if(res.status === 200) {
+            this.setState({
+                dataSource: res.data,
+                verifyID: JSON.stringify(res.data['uuid']),
+                mobile: JSON.stringify(res.data['mobile']),
+                pinCode: JSON.stringify(res.data['scode'])
+
+            })
+            AsyncStorage.setItem('UID123', JSON.stringify([this.state.verifyID, this.state.mobile, this.state.pinCode]));
+            Actions.auth2()
+        }
+    };
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.imageContainer}>
-                    <Image style={styles.imageStyle} source={require('../../../assets/icon1.png')}/>
-                    <Text style={styles.textStyle}>Park Aide</Text>
+            <Provider store={createStore(reducers)}>
+                <View style={styles.container}>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.imageStyle} source={require('../../../assets/icon1.png')}/>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <FormLabel>Phone Number</FormLabel>
+                        <FormInput 
+                            placeholder="6011611778761"
+                            onChangeText={(mobile) => this.setState({mobile})}
+                        />
+                    </View>
+                    <View style={styles.btnContainer}>
+                        <Button
+                            title="Sign Up"
+                            onPress={this.handleSubmitUser}
+                            titleStyle={{ fontWeight: "700" }}
+                            buttonStyle={styles.btnStyle}
+                            containerStyle={{ marginTop: 20 }}
+                        />
+                    </View>
                 </View>
-                <View style={styles.inputContainer}>
-                    <FormLabel>Phone Number</FormLabel>
-                    <FormInput 
-                        placeholder="6011611778761"
-                        onChangeText={(mobile) => this.setState({mobile})}
-                    />
-                </View>
-                
-                <View style={styles.btnContainer}>
-                    <Button
-                        title="Sign Up"
-                        onPress={() => {this.handleSubmitUser()}}
-                        titleStyle={{ fontWeight: "700" }}
-                        buttonStyle={styles.btnStyle}
-                        containerStyle={{ marginTop: 20 }}
-                    />
-                </View>
-            </View>
+            </Provider>
+            
         )
     }
-    
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
     container: {
         flex: 1,
         flexDirection: 'column',

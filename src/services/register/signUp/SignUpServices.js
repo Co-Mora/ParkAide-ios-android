@@ -1,17 +1,18 @@
 import API from '../../API/API';
 
 
-  const createUser = (URL, credentials) => {
-    API().post(`${URL}`, credentials)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        return responseJson;
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+async function createUser(URL, credentials) {
+    try {
 
+      const response = await API().post(`${URL}`, credentials)
+      return response
+
+    } catch(ex) {
+      return ex
+    }
+   
+    
+  };
   
   module.exports = {
     createUser,

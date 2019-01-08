@@ -1,11 +1,20 @@
 import API from '../../API/API';
 
 
-  const loginUser = (URL, credentials) => {
-    API().post(`${URL}`, credentials)
+async function loginUser(URL, credentials) {
+    try {
+
+        const response = await API().post(`${URL}`, credentials)
+        return response
+
+    } catch(ex) {
+        return ex
+    }
+   
+    
   };
-  
   
   module.exports = {
     loginUser,
   }
+  

@@ -1,11 +1,20 @@
 import API from '../../API/API';
 
 
-  const verifyUser = (URL, credentials) => {
-    API().post(`${URL}`, credentials)
+async function verifyUser(URL, credentials) {
+    try {
+
+        const response = await API().post(`${URL}`, credentials)
+        return response
+
+    } catch(ex) {
+        return ex
+    }
+   
+    
   };
-  
   
   module.exports = {
     verifyUser,
   }
+  
