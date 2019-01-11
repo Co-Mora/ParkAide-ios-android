@@ -48,6 +48,12 @@ export default class Verify extends Component {
             scode: this.state.data[2]
         }));
         if(res.status === 200) {
+            const password = res.data['password']
+             var jwt = {
+                mobile: mobile1,
+                password: password
+            }
+            AsyncStorage.setItem('jwt', JSON.stringify(jwt));
             this.setState({
                 password: JSON.stringify(res.data['password']),
             })
@@ -60,14 +66,6 @@ export default class Verify extends Component {
             <View style={styles.container}>
                 {this.state.spinner === true ?  <Loading spinner={this.state.spinner}/> : null}
                 <View style={styles.imageContainer}>
-                    {/* <View style={styles.inputContainer}>
-                        <FormLabel>Phone Number</FormLabel>
-                            <FormInput 
-                                placeholder="333422"
-                                onChangeText={(pinCode) => this.setState({pinCode})}
-                            />
-                    </View> */}
-           
                 <CodePin
                   number={6} // You must pass number prop, it will be used to display 4 (here) inputs
                   checkPinCode={(code, callback) => callback(code === this.state.data[2])}

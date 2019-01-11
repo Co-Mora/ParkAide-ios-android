@@ -1,16 +1,22 @@
 import React from 'react';
-import {Scene, Router} from 'react-native-router-flux';
+import {Scene, Router, Drawer} from 'react-native-router-flux';
 
 import GetStarted from './components/getStarted/GetStarted';
 import SignUp from './components/signUp/SignUp';
 import Verify from './components/verify/Verfiy';
 import TabNav from './components/navigator/TabNav';
+import SideMenu from './components/sideMenu/SideMenu'
 import Onboarding from './components/onBoarding/onBoarding'
+import sidebarButton from './components/sideMenu/sidebarButton/sidebarButton'
 
+import PaymentMethod from './components/payment/PaymentMethod'
+import CreditPay from './components/payment/paymentMethod/CreditPay'
+import BackButton from './components/sideMenu/backButton/BackButton'
 const RouterComponent = () => {
     return (
         <Router>
             <Scene key="root" hideNavBar>
+            
                 <Scene key="slidePage" hideNavBar>
                     <Scene
                         key="slide"
@@ -18,6 +24,7 @@ const RouterComponent = () => {
                         initial 
                         title="Slide"/>
                 </Scene>    
+                
                 <Scene key="started">
                     <Scene
                         rightTitle="Add"
@@ -39,15 +46,42 @@ const RouterComponent = () => {
                         component={Verify}
                         title="Verify" />
                 </Scene>
+                
                 <Scene key="home">
+                    
                     <Scene 
                         key="Home"
                         component={TabNav}
-                        title="Home" />
+                        renderLeftButton={sidebarButton}
+                        title="Car Park" />
+                </Scene>
+                <Scene key="payMethod">
+                    
+                    <Scene 
+                        key="pay"
+                        component={PaymentMethod}
+                        renderLeftButton={BackButton}
+                        title="Payment Method" />
+                    <Scene 
+                        key="credit"
+                        component={CreditPay}
+                         leftButtonImage={BackButton}
+                        title="Visa / Master Card" />
+                </Scene>
+                <Scene key="drawer">
+                    <Drawer
+                        hideNavBar
+                        key="drawerMenu"
+                        ref="navigation"
+                        component={SideMenu}
+                        drawerWidth={300}
+                    >
+                    </Drawer>
                 </Scene>
                 
                 
             </Scene>
+            
         </Router>
             
     ); 

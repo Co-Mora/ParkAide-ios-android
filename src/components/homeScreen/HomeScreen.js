@@ -1,10 +1,10 @@
 import React from 'react';
-import { Alert, Text, TextInput, StyleSheet, View, Picker } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import {StyleSheet, View, Picker, Text } from 'react-native';
 import {AsyncStorage} from 'react-native'
 
 //Import CarPark Services
 import CarParkServices from '../../services/carParkServices/carPark/carParkServices'
+import { Actions } from 'react-native-router-flux';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -23,22 +23,27 @@ export default class App extends React.Component {
         const res = await CarParkServices.fetchAllData(this.state.token, `carpark`)
         this.setState({data: res.data})
     }
-    componentDidMount() {
+    handleToken() {
         AsyncStorage.getItem("token").then((value) => {
             this.setState({token: JSON.parse(value)})
             this.handleCarParkData();
         });
     }
+    componentDidMount() {
+        this.handleToken();
+       
+    }
     render() {
         return (
             <View style={styles.container}>
-                <View style={{ paddingVertical: 5 }} />
-                <Text>Select A Car Park</Text>
-                <Picker style={styles.PickerStyleClass}
+               
+                <View />
+                <Picker
                         selectedValue={this.state.selectedCar}
                         onValueChange={(modeValue, modeIndex) => this.setState({selectedCar: modeValue})}>
+                        <Picker.Item label={"Select Car Park"}/>
                         {this.state.data.map((item, key)=>(
-                            <Picker.Item label={item.name} value={item.name} key={key} />)
+                            <Picker.Item label={item.name} value={item.id} key={key} />)
                         )}
                 </Picker>
             </View>
@@ -48,10 +53,8 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 30,
         backgroundColor: '#fff',
         justifyContent: 'center',
-        paddingHorizontal: 20,
     },
     PickerStyleClass: {
         padding: 0,

@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import Tabbar from 'react-native-tabbar-bottom'
 import {View, StyleSheet, Text } from 'react-native';
 import HomeScreen from '../homeScreen/HomeScreen'
-
 export default class TavNav extends Component {
   constructor() {
     super()
@@ -18,9 +17,9 @@ export default class TavNav extends Component {
           // if you are using react-navigation just pass the navigation object in your components like this:
           // {this.state.page === "HomeScreen" && <MyComp navigation={this.props.navigation}>Screen1</MyComp>}
         }
-        {this.state.page === "HomeScreen" && <HomeScreen />}
-        {this.state.page === "NotificationScreen" && <Text>Screen2</Text>}
-        {this.state.page === "ProfileScreen" && <Text>Screen3</Text>}
+        {this.state.page === "HomeScreen" && <HomeScreen/>}
+        {this.state.page === "ZoneScreen" && <Text>Screen2</Text>}
+        {this.state.page === "ProfileScreen" && <Text>Screen 5</Text>}
         {this.state.page === "ChatScreen" && <Text>Screen4</Text>}
         {this.state.page === "SearchScreen" && <Text>Screen5</Text>}
 
@@ -35,7 +34,7 @@ export default class TavNav extends Component {
               icon: "car",
             },
             {
-              page: "NotificationScreen",
+              page: "ZoneScreen",
               icon: "lock",
               // badgeNumber: 11,
             },
