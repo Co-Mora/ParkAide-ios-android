@@ -12,6 +12,8 @@ import sidebarButton from './components/sideMenu/sidebarButton/sidebarButton'
 import PaymentMethod from './components/payment/PaymentMethod'
 import CreditPay from './components/payment/paymentMethod/CreditPay'
 import BackButton from './components/sideMenu/backButton/BackButton'
+import CarouselMy from './components/carousel/Carousel'
+
 const RouterComponent = () => {
     return (
         <Router>
@@ -67,6 +69,13 @@ const RouterComponent = () => {
                         component={CreditPay}
                          leftButtonImage={BackButton}
                         title="Visa / Master Card" />
+                </Scene>
+                <Scene key="car">
+                    <Scene 
+                        key="carMethod"
+                        component={CarouselMy}
+                         leftButtonImage={BackButton}
+                        title="Car Park" />
                 </Scene>
                 <Scene key="drawer">
                     <Drawer

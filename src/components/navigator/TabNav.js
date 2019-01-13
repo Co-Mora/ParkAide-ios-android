@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import Tabbar from 'react-native-tabbar-bottom'
 import {View, StyleSheet, Text } from 'react-native';
 import HomeScreen from '../homeScreen/HomeScreen'
+import UserHHistory from '../history/UserHistory'
+
 export default class TavNav extends Component {
   constructor() {
     super()
@@ -19,9 +21,10 @@ export default class TavNav extends Component {
         }
         {this.state.page === "HomeScreen" && <HomeScreen/>}
         {this.state.page === "ZoneScreen" && <Text>Screen2</Text>}
-        {this.state.page === "ProfileScreen" && <Text>Screen 5</Text>}
-        {this.state.page === "ChatScreen" && <Text>Screen4</Text>}
-        {this.state.page === "SearchScreen" && <Text>Screen5</Text>}
+        {this.state.page === "CameraScreen" && <Text>CameraScreen</Text>}
+        {this.state.page === "HistoryScreen" && <UserHHistory />}
+        {this.state.page === "ProfileScreen" && <Text>ProfileScreen</Text>}
+
 
         <Tabbar
           stateFunc={(tab) => {
@@ -39,17 +42,16 @@ export default class TavNav extends Component {
               // badgeNumber: 11,
             },
             {
+              page: "CameraScreen",
+              icon: "camera",
+            },
+            {
+              page: "HistoryScreen",
+              icon: "wallet",
+            },
+            {
               page: "ProfileScreen",
               icon: "person",
-            },
-            {
-              page: "ChatScreen",
-              icon: "chatbubbles",
-              badgeNumber: 7,
-            },
-            {
-              page: "SearchScreen",
-              icon: "search",
             },
           ]}
         />
