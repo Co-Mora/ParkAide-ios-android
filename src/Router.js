@@ -74,7 +74,7 @@ const RouterComponent = () => {
                     <Scene 
                         key="carMethod"
                         component={CarouselMy}
-                         leftButtonImage={BackButton}
+                        renderLeftButton={BackButton}
                         title="Car Park" />
                 </Scene>
                 <Scene key="drawer">
@@ -83,7 +83,7 @@ const RouterComponent = () => {
                         key="drawerMenu"
                         ref="navigation"
                         component={SideMenu}
-                        drawerWidth={300}
+                        righ
                     >
                     </Drawer>
                 </Scene>
@@ -98,3 +98,4 @@ const RouterComponent = () => {
 
 
 export default RouterComponent;
+

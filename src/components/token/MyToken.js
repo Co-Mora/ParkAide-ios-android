@@ -12,34 +12,18 @@ export default class App extends React.Component {
 
 
         this.state = {
-            selectedCity: undefined,
-            token: null,
             data: [],
             dataSource: null
         };
     }
 
-    handleCarParkData = async () => {
-        const res = await CarParkServices.fetchAllData(this.state.token, `city/${this.state.selectedCity}/carpark`)
-        this.setState({dataSource: JSON.stringify(res.data)})
-    }
-    handleCityData = async () => {
-        const res = await CarParkServices.fetchAllData(this.state.token, `city`)
-        this.setState({data: res.data})
-    }
-    handleToken() {
-        AsyncStorage.getItem("token").then((value) => {
-            this.setState({token: JSON.parse(value)})
-            this.handleCityData();
-        });
-    }
     componentDidMount() {
         this.handleToken();
+       
     }
     render() {
         return (
             <View style={styles.container}>
-
                 <View>
                     <Picker
                             selectedValue={this.state.selectedCity}
@@ -54,14 +38,11 @@ export default class App extends React.Component {
                     <Button
                             title="Find"
                             onPress={() => {
-                                if(this.state.selectedCity === undefined || this.state.selectedCity === null) {
-                                    alert("Please Select City")
-                                } else {
-                                    this.handleCarParkData();
-                                    setTimeout(() => {
-                                        Actions.car({data: this.state.dataSource});
-                                    }, 300)
-                                }
+                                this.handleCarParkData();
+                                setTimeout(() => {
+                                    Actions.car({data: this.state.dataSource});
+
+                                }, 200)
                             }}
                             titleStyle={{ fontWeight: "700" }}
                             buttonStyle={styles.btnStyle}
@@ -86,9 +67,8 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         flex: 2,
-        justifyContent: 'flex-end',
-        marginBottom: 30,
-        alignItems: 'center',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     btnStyle: {
         backgroundColor: "#e74c3c",

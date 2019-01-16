@@ -7,26 +7,31 @@ export default class TableViewGrid extends Component {
       super();
   
     }
+
+    state = {
+      dataSource: null
+    }
+
+    componentDidMount() {
+      var response = JSON.stringify(this.props.data)
+      alert(this.props.data)
+      
+    }
    
     render() {
       return (
           <View>
             <View>
-                <Text>{this.props.data}</Text>
+                <Text>{this.props.data[0]}</Text>
             </View>
         <View style={styles.container}>
-                <FlatList
-                showsVerticalScrollIndicator={false}
-                data={this.props.data}
-                renderItem={({item}) =>
-                <View style={styles.flatview} key={item.createDat}>
-                  <Text key={item.createDat} style={styles.name}>{item.name}</Text>
-                  <Text key={item.createDat} style={styles.email}>{item.email}</Text>
-                </View>
-                }
-                keyExtractor={item => item.createDate}
-
-            />
+               <ScrollView>
+                  {this.props.data.map((item, key)=>(
+                                <Text key={key}>{item.title}</Text>)
+                            )}
+                 
+               </ScrollView>
+          
             
         </View>      
           </View>

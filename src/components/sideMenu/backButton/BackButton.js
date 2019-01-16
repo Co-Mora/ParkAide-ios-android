@@ -4,7 +4,7 @@ import {Actions} from "react-native-router-flux"
 const BackButton = () => {
     return (
       <TouchableOpacity
-        onPress={() => { Actions.drawer() }} underlayColor="black"
+        onPress={() => { Actions.home() }} underlayColor="black"
       >
           <Image
           style={styles.menuIconStyle}

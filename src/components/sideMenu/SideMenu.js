@@ -1,42 +1,63 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
-
-import Icon from 'react-native-vector-icons/EvilIcons'
-import {OffCanvas3D} from 'react-native-off-canvas-menu'
+import {StyleSheet, Image} from "react-native";
+import {
+    Text,
+    Container,
+    List,
+    ListItem,
+    Content,
+    Icon
+  } from "native-base";
 
 import { Button } from 'react-native-elements';
-import {Actions} from 'react-native-router-flux'
+const routes = [
+    "Home",
+    "payMethod",
+    "My Token",
+    "My Special",
+    "My Vechicle",
+    "My Booking",
+    "My Season Pass",
+    "Terms and Condition",
+    "About"
+];
+
 export default class SideMenu extends Component {
     constructor(props) {
         super(props);
     };
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.touchContainer}>
-                    <TouchableOpacity onPress={() => {
-                        Actions.payMethod();
-                    }}>
-                        <Text style={styles.textStyle}>Top Up</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.textStyle}>Profile</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.textStyle}>Logout</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.btnContainer}>
-                    <Button
-                        title="Back"
-                        onPress={() => {Actions.replace('home')}}
-                        titleStyle={{ fontWeight: "700" }}
-                        buttonStyle={styles.btnStyle}
-                        containerStyle={{ marginTop: 20 }}
-                    />
-                </View>
-                
-            </View>
+            <Container>
+                <Content>
+                <Image
+                    source={{
+                    uri:
+                        "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/drawer-cover.png"
+                    }}
+                    style={{
+                    height: 120,
+                    width: "100%",
+                    alignSelf: "stretch",
+                    position: "absolute"
+                    }}
+                />
+                <List
+                    dataArray={routes}
+                    contentContainerStyle={{ marginTop: 120 }}
+                    renderRow={data => {
+                    return (
+                        <ListItem
+                        button
+                        onPress={() => this.props.navigation.navigate(data)}
+                        >
+                        <Text>{data}</Text>
+                        </ListItem>
+                    );
+                    }}
+                />
+                </Content>
+            </Container>
         );
     }
 }

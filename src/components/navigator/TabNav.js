@@ -4,6 +4,8 @@ import {View, StyleSheet, Text } from 'react-native';
 import HomeScreen from '../homeScreen/HomeScreen'
 import UserHHistory from '../history/UserHistory'
 
+import Scanner from '../qrCodeScanner/ScanScreen'
+
 export default class TavNav extends Component {
   constructor() {
     super()
@@ -21,7 +23,7 @@ export default class TavNav extends Component {
         }
         {this.state.page === "HomeScreen" && <HomeScreen/>}
         {this.state.page === "ZoneScreen" && <Text>Screen2</Text>}
-        {this.state.page === "CameraScreen" && <Text>CameraScreen</Text>}
+        {this.state.page === "CameraScreen" && <Scanner />}
         {this.state.page === "HistoryScreen" && <UserHHistory />}
         {this.state.page === "ProfileScreen" && <Text>ProfileScreen</Text>}
 
